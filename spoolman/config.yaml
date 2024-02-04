@@ -1,0 +1,39 @@
+name: "spoolman"
+description: >-
+  "Keep track of your inventory of 3D-printer filament spools."
+version: "0.16.0"
+url: "https://github.com/Donkie/Spoolman"
+slug: "Spoolman"
+init: false
+arch:
+  - amd64
+  - i386
+image: ghcr.io/donkie/spoolman
+version: latest
+startup: services
+ports:
+  8000/tcp: 8000
+options:
+  env_vars: []
+environment:
+  TZ: "Europe/Copenhagen"
+  SPOOLMAN_DB_TYPE: "sqlite"
+  FORWARDED_ALLOW_IPS: "*"
+  SPOOLMAN_DEBUG_MODE: "TRUE"
+  #SPOOLMAN_DIR_DATA: /data
+  #SPOOLMAN_DIR_LOGS: /data
+  #SPOOLMAN_DIR_BACKUPS: /data
+map:
+  - share:rw
+  - config:rw
+  - ssl:ro
+#image: "ghcr.io/home-assistant/{-addon-example"
+ingress: true
+ingress_port: 8000
+apparmor: false
+privileged: 
+  - SYS_ADMIN
+full_access: true
+host_network: true
+ingress_entry: /spoolman
+advanced: true
